@@ -6,3 +6,5 @@ services:
     image: ollama/ollama
     ports:
       - "11434:11434"
+    volumes:
+      - /Users/koes1124/Desktop/MyProjects/LlmModels:/opt/models

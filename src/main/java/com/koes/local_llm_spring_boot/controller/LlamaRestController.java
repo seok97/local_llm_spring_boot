@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.Map;
+
 @RestController
 public class LlamaRestController {
     private final LlamaAiService llamaAiService;
@@ -31,5 +33,13 @@ public class LlamaRestController {
     public ResponseEntity<LlamaResponse> generateJoke(@PathVariable String topic) {
       final LlamaResponse aiResponse = llamaAiService.generateJoke(topic);
       return ResponseEntity.status(HttpStatus.OK).body(aiResponse);
+    }
+
+    @GetMapping("embbeding/test")
+    public Map<String, Object> getEmbbeding(
+            @RequestParam(value = "promptMessage", defaultValue = "Why is the sky blue?")
+            String promptMessage){
+        Map<String, Object> result = llamaAiService.generateEmbeddingVector(promptMessage);
+        return result;
     }
 }
